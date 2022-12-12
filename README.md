@@ -9,3 +9,8 @@
 
 ### ADO.NET
     Core de acesso à dados para N provedores que a microsoft suporta
+
+```
+dotnet add package Microsoft.Data.SqlClient
+dotnet add package Dapper
+```
