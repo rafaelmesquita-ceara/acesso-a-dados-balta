@@ -22,15 +22,23 @@ namespace Blog
 
         public static void ReadUsers(SqlConnection connection)
         {
-            var repository = new UserRepository(connection);
-            var users = repository.Get();
+            var repository = new Repository<User>(connection);
+            var items = repository.Get();
 
-            foreach (var user in users)
+            foreach (var user in items)
+                Console.WriteLine(user.Name);
+        }
+        public static void ReadRoles(SqlConnection connection)
+        {
+            var repository = new Repository<Role>(connection);
+            var items = repository.Get();
+
+            foreach (var user in items)
                 Console.WriteLine(user.Name);
         }
         public static void ReadUser(SqlConnection connection)
         {
-            var repository = new UserRepository(connection);
+            var repository = new Repository<User>(connection);
             var user = repository.Get(1);
             Console.WriteLine(user.Name);
         }
@@ -47,7 +55,7 @@ namespace Blog
                 Slug = "equipe-balta"
             };
 
-            var repository = new UserRepository(connection);
+            var repository = new Repository<User>(connection);
             repository.Create(user);
             Console.WriteLine("Cadastro realizado com sucesso");
         }
@@ -65,14 +73,14 @@ namespace Blog
                 Slug = "equipe-balta"
             };
 
-            var repository = new UserRepository(connection);
+            var repository = new Repository<User>(connection);
             repository.Create(user);
             Console.WriteLine("Atualização realizada com sucesso");
         }
 
         public static void DeleteUser(SqlConnection connection)
         {
-            var repository = new UserRepository(connection);
+            var repository = new Repository<User>(connection);
             var user = repository.Get(1);
             repository.Create(user);
             Console.WriteLine("Exclusão realizada com sucesso");
