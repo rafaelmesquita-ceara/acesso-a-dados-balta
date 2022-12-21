@@ -12,7 +12,7 @@ namespace Blog
         {
             var connection = new SqlConnection(CONNECTION_STRING);
             connection.Open();
-            //ReadUsers(connection);
+            ReadUsers(connection);
             //ReadUser(connection);
             //CreateUser(connection);
             //UpdateUser(connection);
@@ -25,16 +25,23 @@ namespace Blog
             var repository = new Repository<User>(connection);
             var items = repository.Get();
 
-            foreach (var user in items)
-                Console.WriteLine(user.Name);
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
+                foreach (var role in item.Roles)
+                {
+                    Console.WriteLine($" - {role.Name}");
+                }
+            }
+
         }
         public static void ReadRoles(SqlConnection connection)
         {
             var repository = new Repository<Role>(connection);
             var items = repository.Get();
 
-            foreach (var user in items)
-                Console.WriteLine(user.Name);
+            foreach (var item in items)
+                Console.WriteLine(item.Name);
         }
         public static void ReadUser(SqlConnection connection)
         {
